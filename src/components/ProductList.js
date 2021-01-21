@@ -1,12 +1,12 @@
-import products from "../products";
-import styles from "../styles";
+import { List } from "../styles";
 import Product from "./Product";
+import products from "../products";
 
 const ProductList = () => {
   const productList = products.map((product) => {
     return <Product key={product.id} product={product} />;
   });
-  return <div style={styles.list}>{productList}</div>;
+  return <List>{productList}</List>;
 };
 
 export default ProductList;
