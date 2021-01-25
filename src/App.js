@@ -3,7 +3,10 @@ import { GlobalStyle, ThemeButton } from "./styles";
 
 import Home from "./components/Home";
 import ProductList from "./components/ProductList";
+import ProductDetail from "./components/ProductDetail";
 import { ThemeProvider } from "styled-components";
+
+import products from "./products";
 
 const theme = {
   light: {
@@ -22,10 +25,17 @@ const theme = {
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState("light");
+  const [product, setProduct] = useState(null);
   const toggleTheme = () => {
     if (currentTheme === "dark") setCurrentTheme("light");
     else setCurrentTheme("dark");
   };
+
+  const display = product ? (
+    <ProductDetail product={product} setProduct={setProduct} />
+  ) : (
+    <ProductList setProduct={setProduct} />
+  );
   return (
     <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
@@ -33,7 +43,7 @@ function App() {
         {currentTheme.toUpperCase()} Theme
       </ThemeButton>
       <Home />
-      <ProductList />
+      {display}
     </ThemeProvider>
   );
 }
