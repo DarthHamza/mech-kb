@@ -1,8 +1,9 @@
 import { Keyboard, KeyboardImage } from "../styles";
-
+import DeleteButton from "./DeleteButton";
 const Product = (props) => {
   const product = props.product;
   const setProduct = props.setProduct;
+
   return (
     <Keyboard>
       <p>{product.name}</p>
@@ -11,6 +12,12 @@ const Product = (props) => {
         src={product.image}
         alt={product.name}
         onClick={() => setProduct(product)}
+      />
+      <br />
+      <DeleteButton
+        deleteProduct={props.deleteProduct}
+        product={product}
+        setProduct={setProduct}
       />
     </Keyboard>
   );

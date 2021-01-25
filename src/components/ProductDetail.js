@@ -1,4 +1,5 @@
 import { DetailWrapper } from "../styles";
+import DeleteButton from "./DeleteButton";
 
 const ProductDetail = (props) => {
   const product = props.product;
@@ -14,6 +15,11 @@ const ProductDetail = (props) => {
       >
         Go back home!
       </button>
+      <DeleteButton
+        deleteProduct={props.deleteProduct}
+        product={product}
+        setProduct={props.setProduct}
+      />
     </DetailWrapper>
   );
 };
