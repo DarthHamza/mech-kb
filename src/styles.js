@@ -1,4 +1,18 @@
 import styled, { createGlobalStyle } from "styled-components";
+import { Link, NavLink } from "react-router-dom";
+
+export const NavProduct = styled(NavLink)`
+  color: ${(props) => props.theme.mainColor};
+
+  &.active {
+    color: ${(props) => props.theme.red} !important;
+  }
+`;
+
+export const StyledLink = styled(Link)`
+  font-weight: bold;
+  color: ${(props) => props.theme.red} !important;
+`;
 
 export const Description = styled.p`
   text-align: center;

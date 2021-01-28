@@ -12,7 +12,6 @@ const ProductList = (props) => {
       <Product
         key={product.id}
         product={product}
-        setProduct={props.setProduct}
         deleteProduct={props.deleteProduct}
       />
     ));

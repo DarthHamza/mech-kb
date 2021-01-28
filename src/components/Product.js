@@ -11,14 +11,10 @@ const Product = (props) => {
       <img
         src={product.image}
         alt={product.name}
-        onClick={() => setProduct(product)}
+        onClick={() => console.log("Take me to detail")}
       />
       <br />
-      <DeleteButton
-        deleteProduct={props.deleteProduct}
-        product={product}
-        setProduct={setProduct}
-      />
+      <DeleteButton deleteProduct={props.deleteProduct} product={product} />
     </Keyboard>
   );
 };

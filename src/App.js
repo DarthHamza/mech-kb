@@ -4,7 +4,9 @@ import { GlobalStyle, ThemeButton } from "./styles";
 import Home from "./components/Home";
 import ProductList from "./components/ProductList";
 import ProductDetail from "./components/ProductDetail";
+import NavBar from "./components/NavBar";
 import { ThemeProvider } from "styled-components";
+import { Route, Switch } from "react-router";
 
 import products from "./products";
 
@@ -26,7 +28,6 @@ const theme = {
 function App() {
   const [currentTheme, setCurrentTheme] = useState("light");
   const [_products, setProducts] = useState(products);
-  const [product, setProduct] = useState(null);
 
   const toggleTheme = () => {
     if (currentTheme === "dark") setCurrentTheme("light");
@@ -40,27 +41,21 @@ function App() {
     setProducts(keptProducts);
   };
 
-  const display = product ? (
-    <ProductDetail
-      product={product}
-      setProduct={setProduct}
-      deleteProduct={deleteProduct}
-    />
-  ) : (
-    <ProductList
-      products={_products}
-      setProduct={setProduct}
-      deleteProduct={deleteProduct}
-    />
-  );
   return (
     <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
+      <NavBar />
       <ThemeButton onClick={toggleTheme}>
         {currentTheme.toUpperCase()} Theme
       </ThemeButton>
-      <Home />
-      {display}
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/products">
+          <ProductList products={_products} deleteProduct={deleteProduct} />
+        </Route>
+      </Switch>
     </ThemeProvider>
   );
 }
