@@ -1,13 +1,19 @@
-import { DetailWrapper } from "../styles";
-import DeleteButton from "./DeleteButton";
-import { useParams, Redirect } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Redirect, useParams } from "react-router-dom";
 
-const ProductDetail = (props) => {
-  const productSlug = useParams().productSlug;
-  const product = props.products.find(
-    (product) => product.slug === productSlug
+import DeleteButton from "./DeleteButton";
+import { DetailWrapper } from "../styles";
+import { Helmet } from "react-helmet";
+import { useSelector } from "react-redux";
+
+const ProductDetail = () => {
+  // const products = useSelector((state) => state.products);
+  // const productSlug = useParams().productSlug;
+  // const product = products.find((product) => product.slug === productSlug);
+
+  const product = useSelector((state) =>
+    state.products.find((product) => product.slug === useParams().productSlug)
   );
+
   if (!product) return <Redirect to="/products" />;
   return (
     <DetailWrapper className="text-left">
@@ -19,7 +25,7 @@ const ProductDetail = (props) => {
       <p className="text-danger">{product.price} USD</p>
       <p>{product.description}</p>
       <button className="btn btn-outline-info">Go back home!</button>
-      <DeleteButton deleteProduct={props.deleteProduct} product={product} />
+      <DeleteButton product={product} />
     </DetailWrapper>
   );
 };

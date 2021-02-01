@@ -1,21 +1,18 @@
-import { useState } from "react";
+import { Helmet } from "react-helmet";
 import { List } from "../styles";
 import Product from "./Product";
 import SearchBar from "./SearchBar";
-import { Helmet } from "react-helmet";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
-const ProductList = (props) => {
+const ProductList = () => {
+  const products = useSelector((state) => state.products);
+
   const [query, setQuery] = useState("");
 
-  const productList = props.products
+  const productList = products
     .filter((product) => product.name.toLowerCase().includes(query))
-    .map((product) => (
-      <Product
-        key={product.id}
-        product={product}
-        deleteProduct={props.deleteProduct}
-      />
-    ));
+    .map((product) => <Product key={product.id} product={product} />);
   return (
     <>
       <Helmet>

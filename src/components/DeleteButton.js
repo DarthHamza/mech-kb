@@ -1,9 +1,13 @@
+import { deleteProduct } from "../store/actions";
+import { useDispatch } from "react-redux";
 const DeleteButton = (props) => {
-  const handleDelete = () => {
-    props.deleteProduct(props.product.id);
-  };
+  const dispatch = useDispatch();
+
   return (
-    <button className="btn btn-outline-danger" onClick={handleDelete}>
+    <button
+      className="btn btn-outline-danger"
+      onClick={() => dispatch(deleteProduct(props.productId))}
+    >
       Delete
     </button>
   );
