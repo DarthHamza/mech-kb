@@ -1,5 +1,7 @@
 import { Keyboard, KeyboardImage } from "../styles";
 import DeleteButton from "./DeleteButton";
+import { Link } from "react-router-dom";
+
 const Product = (props) => {
   const product = props.product;
   const setProduct = props.setProduct;
@@ -8,11 +10,9 @@ const Product = (props) => {
     <Keyboard>
       <p>{product.name}</p>
       <p className="price">Price: {product.price} USD</p>
-      <img
-        src={product.image}
-        alt={product.name}
-        onClick={() => console.log("Take me to detail")}
-      />
+      <Link to={`/products/${product.slug}`}>
+        <img src={product.image} alt={product.name} />
+      </Link>
       <br />
       <DeleteButton deleteProduct={props.deleteProduct} product={product} />
     </Keyboard>

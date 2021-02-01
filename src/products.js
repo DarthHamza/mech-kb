@@ -2,6 +2,7 @@ const products = [
   {
     id: 1,
     name: "60% Frosted Acrylic Keyboard",
+    slug: "60-frosted-acrylic-keyboard",
     price: 140,
     description: `
     60% Frosted Acrylic case
@@ -17,6 +18,7 @@ const products = [
   {
     id: 2,
     name: "60% Wood custom keyboard",
+    slug: "60-wood-custom-keyboard",
     price: 150,
     description: `
     Wood case +WristRest
@@ -29,6 +31,7 @@ const products = [
   {
     id: 3,
     name: "60% plastic mechanical keyboard with EPBT Keycaps",
+    slug: "60-plastic-mechanical-keyboard-with-epbt-keycaps",
     price: 80,
     description: `DZ60 rev 3.0 PCB (type-C, soldered version, RGB underglow, support QMK and VIA configurator)   
     EPBT dye-sub keycaps，Multi-color keycaps are laser carved，total 61 keys

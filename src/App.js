@@ -7,6 +7,7 @@ import ProductDetail from "./components/ProductDetail";
 import NavBar from "./components/NavBar";
 import { ThemeProvider } from "styled-components";
 import { Route, Switch } from "react-router";
+import { Helmet } from "react-helmet";
 
 import products from "./products";
 
@@ -45,15 +46,21 @@ function App() {
     <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
       <NavBar />
+      <Helmet>
+        <title>Vader's Shop</title>
+      </Helmet>
       <ThemeButton onClick={toggleTheme}>
         {currentTheme.toUpperCase()} Theme
       </ThemeButton>
       <Switch>
-        <Route exact path="/">
-          <Home />
+        <Route path="/products/:productSlug">
+          <ProductDetail products={_products} deleteProduct={deleteProduct} />
         </Route>
         <Route path="/products">
           <ProductList products={_products} deleteProduct={deleteProduct} />
+        </Route>
+        <Route path="/">
+          <Home />
         </Route>
       </Switch>
     </ThemeProvider>
