@@ -3,6 +3,7 @@ import { Redirect, useParams } from "react-router-dom";
 import DeleteButton from "./DeleteButton";
 import { DetailWrapper } from "../styles";
 import { Helmet } from "react-helmet";
+import UpdateButton from "./UpdateButton";
 import { useSelector } from "react-redux";
 
 const ProductDetail = () => {
@@ -26,6 +27,7 @@ const ProductDetail = () => {
       <p>{product.description}</p>
       <button className="btn btn-outline-info">Go back home!</button>
       <DeleteButton product={product} />
+      <UpdateButton slug={product.slug} />
     </DetailWrapper>
   );
 };

@@ -1,32 +1,38 @@
 import React, { useState } from "react";
-
-import { addProduct } from "../store/actions";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { addProduct, updateProduct } from "../store/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 
 const ProductForm = () => {
-  const history = useHistory();
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { productSlug } = useParams();
+  const foundProduct = useSelector((state) =>
+    state.products.find((product) => product.slug === productSlug)
+  );
 
-  const [product, setProduct] = useState({
-    name: "",
-    price: 0,
-    description: "",
-    image: "",
-  });
+  const [product, setProduct] = useState(
+    foundProduct ?? {
+      name: "",
+      price: 0,
+      description: "",
+      image: "",
+    }
+  );
 
   const handleChange = (event) =>
     setProduct({ ...product, [event.target.name]: event.target.value });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(addProduct(product));
+    if (foundProduct) dispatch(updateProduct(product));
+    else dispatch(addProduct(product));
     history.push("/products");
   };
 
   return (
     <form className="container" onSubmit={handleSubmit}>
-      <h1>Create Product</h1>
+      <h1>{foundProduct ? "Update" : "Create"} Product</h1>
       <div className="mb-3">
         <label className="form-label">Name</label>
         <input
@@ -68,7 +74,7 @@ const ProductForm = () => {
         />
       </div>
       <button type="submit" className="btn btn-info float-right">
-        Create
+        {foundProduct ? "Update" : "Create"}
       </button>
     </form>
   );

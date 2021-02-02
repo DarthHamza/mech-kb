@@ -2,6 +2,7 @@ import { Keyboard, KeyboardImage } from "../styles";
 
 import DeleteButton from "./DeleteButton";
 import { Link } from "react-router-dom";
+import UpdateButton from "./UpdateButton";
 
 const Product = (props) => {
   const product = props.product;
@@ -16,9 +17,7 @@ const Product = (props) => {
       </Link>
       <br />
       <DeleteButton productId={product.id} />
-      <Link to={`/products/${product.slug}/edit`}>
-        <button className="btn btn-outline-warning">Edit</button>
-      </Link>
+      <UpdateButton slug={product.slug} />
     </Keyboard>
   );
 };
