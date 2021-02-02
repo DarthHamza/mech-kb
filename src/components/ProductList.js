@@ -1,4 +1,6 @@
+import { BsPlusSquare } from "react-icons/bs";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 import { List } from "../styles";
 import Product from "./Product";
 import SearchBar from "./SearchBar";
@@ -19,6 +21,9 @@ const ProductList = () => {
         <title>Vader's Keyboards</title>
       </Helmet>
       <SearchBar setQuery={setQuery} />
+      <Link to="/products/new">
+        <BsPlusSquare className="float-right" size="2em" />
+      </Link>
       <List>{productList}</List>
     </>
   );

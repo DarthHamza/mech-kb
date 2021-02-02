@@ -16,6 +16,9 @@ const Product = (props) => {
       </Link>
       <br />
       <DeleteButton productId={product.id} />
+      <Link to={`/products/${product.slug}/edit`}>
+        <button className="btn btn-outline-warning">Edit</button>
+      </Link>
     </Keyboard>
   );
 };

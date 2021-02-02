@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 import ProductDetail from "./components/ProductDetail";
+import ProductForm from "./components/ProductForm";
 import ProductList from "./components/ProductList";
 import { ThemeProvider } from "styled-components";
 import products from "./products";
@@ -44,6 +45,9 @@ function App() {
         {currentTheme.toUpperCase()} Theme
       </ThemeButton>
       <Switch>
+        <Route path={["/products/new", "/products/:productSlug/edit"]}>
+          <ProductForm />
+        </Route>
         <Route path="/products/:productSlug">
           <ProductDetail />
         </Route>

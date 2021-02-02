@@ -1,4 +1,7 @@
+import { ADD_PRODUCT, DELETE_PRODUCT } from "./actions";
+
 import productsData from "../products";
+import slugify from "slugify";
 
 const initialState = {
   products: productsData,
@@ -6,7 +9,15 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "DELETE_PRODUCT":
+    case ADD_PRODUCT:
+      const { newProduct } = action.payload;
+      newProduct.slug = slugify(newProduct.name, { lower: true });
+      newProduct.id = state.products[state.products.length - 1].id + 1;
+      return {
+        ...state,
+        products: [...state.products, newProduct],
+      };
+    case DELETE_PRODUCT:
       return {
         ...state,
         products: state.products.filter(
