@@ -5,10 +5,8 @@ import {
   FETCH_PRODUCTS,
 } from "./actions";
 
-import productsData from "../products";
-
 const initialState = {
-  products: productsData,
+  products: [],
 };
 
 const reducer = (state = initialState, action) => {
