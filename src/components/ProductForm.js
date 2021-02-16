@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import { addProduct, updateProduct } from "../store/actions";
+import { addProduct, updateProduct } from "../store/actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
 const ProductForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { productSlug } = useParams();
+  const { productSlug, shopId } = useParams();
   const foundProduct = useSelector((state) =>
-    state.products.find((product) => product.slug === productSlug)
+    state.magic.products.find((product) => product.slug === productSlug)
   );
 
   const [product, setProduct] = useState(
     foundProduct ?? {
+      shopId: shopId,
       name: "",
       price: 0,
       description: "",
@@ -22,6 +23,9 @@ const ProductForm = () => {
 
   const handleChange = (event) =>
     setProduct({ ...product, [event.target.name]: event.target.value });
+
+  const handleImage = (event) =>
+    setProduct({ ...product, image: event.target.files[0] });
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -66,9 +70,8 @@ const ProductForm = () => {
       <div className="mb-3">
         <label className="form-label">Image</label>
         <input
-          type="text"
-          value={product.image}
-          onChange={handleChange}
+          type="file"
+          onChange={handleImage}
           name="image"
           className="form-control"
         />

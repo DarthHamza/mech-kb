@@ -1,5 +1,6 @@
 import { GlobalStyle, ThemeButton } from "./styles";
 import { Route, Switch } from "react-router";
+import { useSelector } from "react-redux";
 
 import { Helmet } from "react-helmet";
 import Home from "./components/Home";
@@ -8,8 +9,9 @@ import ProductDetail from "./components/ProductDetail";
 import ProductForm from "./components/ProductForm";
 import ProductList from "./components/ProductList";
 import { ThemeProvider } from "styled-components";
-import products from "./products";
 import { useState } from "react";
+import ShopList from "./components/ShopList";
+import ShopDetail from "./components/ShopDetail";
 
 const theme = {
   light: {
@@ -28,6 +30,7 @@ const theme = {
 
 function App() {
   const [currentTheme, setCurrentTheme] = useState("light");
+  const products = useSelector((state) => state.magic.products);
 
   const toggleTheme = () => {
     if (currentTheme === "dark") setCurrentTheme("light");
@@ -45,14 +48,22 @@ function App() {
         {currentTheme.toUpperCase()} Theme
       </ThemeButton>
       <Switch>
-        <Route path={["/products/new", "/products/:productSlug/edit"]}>
+        <Route
+          path={["/shops/:shopId/products/new", "/products/:productSlug/edit"]}
+        >
           <ProductForm />
         </Route>
         <Route path="/products/:productSlug">
           <ProductDetail />
         </Route>
         <Route path="/products">
-          <ProductList />
+          <ProductList products={products} />
+        </Route>
+        <Route path="/shops/:shopSlug">
+          <ShopDetail />
+        </Route>
+        <Route path="/shops">
+          <ShopList />
         </Route>
         <Route path="/">
           <Home />

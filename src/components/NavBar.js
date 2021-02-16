@@ -8,8 +8,8 @@ const NavBar = () => {
       </StyledLink>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav ml-auto">
-          <NavProduct className="nav-item nav-link" exact to="/">
-            Home
+          <NavProduct className="nav-item nav-link" to="/shops">
+            Shops
           </NavProduct>
           <NavProduct className="nav-item nav-link" to="/products">
             Products

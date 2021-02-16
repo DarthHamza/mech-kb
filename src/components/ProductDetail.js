@@ -12,7 +12,7 @@ const ProductDetail = () => {
   // const product = products.find((product) => product.slug === productSlug);
 
   const product = useSelector((state) =>
-    state.products.find((product) => product.slug === productSlug)
+    state.magic.products.find((product) => product.slug === productSlug)
   );
 
   if (!product) return <Redirect to="/products" />;
