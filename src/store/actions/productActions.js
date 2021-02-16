@@ -1,18 +1,15 @@
 // ACTION TYPES
-import axios from "axios";
+import * as types from "./types";
+import instance from "./instance";
 
-export const ADD_PRODUCT = "ADD_PRODUCT";
-export const DELETE_PRODUCT = "DELETE_PRODUCT";
-export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
-export const FETCH_PRODUCTS = "FETCH_PRODUCTS";
 // ACTIONS
 
 export const fetchProducts = () => async (dispatch) => {
   try {
-    const res = await axios.get("http://localhost:8000/products");
+    const res = await instance.get("/products");
     console.log(res.data);
     dispatch({
-      type: FETCH_PRODUCTS,
+      type: types.FETCH_PRODUCTS,
       payload: res.data,
     });
   } catch (error) {
@@ -21,10 +18,19 @@ export const fetchProducts = () => async (dispatch) => {
 };
 
 export const addProduct = (newProduct) => async (dispatch) => {
+  console.log(
+    "🚀 ~ file: productActions.js ~ line 21 ~ addProduct ~ newProduct",
+    newProduct
+  );
   try {
-    const res = await axios.post("http://localhost:8000/products/", newProduct);
+    const formData = new FormData();
+    for (const key in newProduct) formData.append(key, newProduct[key]);
+    const res = await instance.post(
+      `/shops/${newProduct.shopId}/products`,
+      formData
+    );
     dispatch({
-      type: ADD_PRODUCT,
+      type: types.ADD_PRODUCT,
       payload: { newProduct: res.data },
     });
   } catch (error) {
@@ -34,9 +40,9 @@ export const addProduct = (newProduct) => async (dispatch) => {
 
 export const deleteProduct = (productId) => async (dispatch) => {
   try {
-    await axios.delete(`http://localhost:8000/products/${productId}`);
+    await instance.delete(`/products/${productId}`);
     dispatch({
-      type: DELETE_PRODUCT,
+      type: types.DELETE_PRODUCT,
       payload: { productId },
     });
   } catch (error) {
@@ -46,12 +52,11 @@ export const deleteProduct = (productId) => async (dispatch) => {
 
 export const updateProduct = (updatedProduct) => async (dispatch) => {
   try {
-    const res = await axios.put(
-      `http://localhost:8000/products/${updatedProduct.id}`,
-      updatedProduct
-    );
+    const formData = new FormData();
+    for (const key in updatedProduct) formData.append(key, updatedProduct[key]);
+    const res = await instance.put(`/products/${updatedProduct.id}`, formData);
     dispatch({
-      type: UPDATE_PRODUCT,
+      type: types.UPDATE_PRODUCT,
       payload: { updatedProduct: res.data },
     });
   } catch (error) {

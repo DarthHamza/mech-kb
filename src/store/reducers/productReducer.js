@@ -3,7 +3,7 @@ import {
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
   FETCH_PRODUCTS,
-} from "./actions";
+} from "../actions/types";
 
 const initialState = {
   products: [],
