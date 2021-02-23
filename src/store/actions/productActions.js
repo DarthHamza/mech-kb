@@ -18,10 +18,6 @@ export const fetchProducts = () => async (dispatch) => {
 };
 
 export const addProduct = (newProduct) => async (dispatch) => {
-  console.log(
-    "🚀 ~ file: productActions.js ~ line 21 ~ addProduct ~ newProduct",
-    newProduct
-  );
   try {
     const formData = new FormData();
     for (const key in newProduct) formData.append(key, newProduct[key]);
