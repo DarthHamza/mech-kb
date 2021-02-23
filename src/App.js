@@ -1,7 +1,7 @@
 import { GlobalStyle, ThemeButton } from "./styles";
 import { ThemeProvider } from "styled-components";
 import { useState } from "react";
-
+import Cookies from "js-cookie";
 import { Helmet } from "react-helmet";
 import NavBar from "./components/NavBar";
 
@@ -23,11 +23,18 @@ const theme = {
 };
 
 function App() {
-  const [currentTheme, setCurrentTheme] = useState("light");
+  const [currentTheme, setCurrentTheme] = useState(
+    Cookies.get("theme") ?? "light"
+  );
 
   const toggleTheme = () => {
-    if (currentTheme === "dark") setCurrentTheme("light");
-    else setCurrentTheme("dark");
+    if (currentTheme === "dark") {
+      setCurrentTheme("light");
+      Cookies.set("theme", "light");
+    } else {
+      setCurrentTheme("dark");
+      Cookies.set("theme", "dark");
+    }
   };
 
   return (
